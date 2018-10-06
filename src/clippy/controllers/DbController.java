@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class DbController {
     private Connection conn;
-    private DbController(){
+    public DbController(){
         this.conn = null;
         try{
             String url = "jdbc:sqlite:clippy.db";
