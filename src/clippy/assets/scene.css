@@ -1,0 +1,12 @@
+@font-face{
+    font-family: 'Aileron';
+    src: url('Aileron-Regular.otf');
+}
+
+#text{
+    -fx-font: 36px "Aileron";
+
+}
+
+.root {
+}
