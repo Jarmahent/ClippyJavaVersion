@@ -11,13 +11,13 @@ import java.time.LocalDate;
 
 public class Chandler extends Thread {
     private String oldString = "";
-//    private DbController dbController;
+    private DbController dbController;
     private int delay;
     private Clipboard clipboard;
 
     public Chandler(int delay){
         this.delay = delay;
-//        this.dbController = new DbController();
+        this.dbController = new DbController();
         this.clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
     }
 
@@ -37,6 +37,7 @@ public class Chandler extends Thread {
 
                     continue;
                 }
+                this.dbController.writeData(newString, localDate.toString());
                 System.out.println("Date: " + localDate + "\n");
                 System.out.println("Clipboard Data: " + newString);
                 oldString = newString;

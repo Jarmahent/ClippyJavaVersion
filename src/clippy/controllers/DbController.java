@@ -14,7 +14,7 @@ public class DbController {
             System.out.println(sqlerr.getMessage());
         }
     }
-    private void createTable(){
+    public void createTable(){
         String query = "CREATE TABLE `textdata` \n"
         + "( `id` INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, `text` TEXT, `time` TEXT )";
 
@@ -24,7 +24,7 @@ public class DbController {
             stmt.execute(query);
             try{
                 if(this.conn != null){
-                    System.out.println("Closing Connection...");
+                    System.out.println("Closing Connection...1");
                     this.conn.close();
                 }
             }catch(SQLException sqlerr){
@@ -35,17 +35,18 @@ public class DbController {
         }
     }
 
-    private void writeData(String text, String time){
+    public void writeData(String text, String time){
         String query = "INSERT INTO textdata(text, time) VALUES(?, ?)";
         try{
             PreparedStatement pstmt = this.conn.prepareStatement(query);
             pstmt.setString(1, text);
             pstmt.setString(2, time);
+            System.out.println("Data inserted...2");
             pstmt.executeUpdate();
             try{
                 if(this.conn != null){
                     this.conn.close();
-                    System.out.println("Closing connection...");
+                    System.out.println("Closing connection...2");
                 }
             }catch(SQLException sqlerr){
                 System.out.println(sqlerr.getMessage());
@@ -55,9 +56,4 @@ public class DbController {
         }
     }
 
-    public static void main(String[] args){
-        DbController handler = new DbController();
-        handler.writeData("TEXTHERE", "TIMEHERE");
-
-    }
 }
