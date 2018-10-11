@@ -11,7 +11,13 @@
 
 <Pane fx:id="rootpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clippy.Controller">
    <children>
-      <Button  fx:id="mybutton" defaultButton="true" layoutX="400.0" layoutY="215.0" mnemonicParsing="false" onAction="#handleButtonClicked" text="Insert Text" />
-      <Button  defaultButton="true" layoutX="294.0" layoutY="215.0" mnemonicParsing="false" onAction="#Listener" text="Start Thread" />
+       
+      <Button fx:id="mybutton" defaultButton="true" layoutX="400.0" layoutY="215.0" mnemonicParsing="false" onAction="#handleButtonClicked" text="Insert Text" />
+      <Button defaultButton="true" layoutX="294.0" layoutY="215.0" mnemonicParsing="false" onAction="#Listener" text="Start Thread" />
+      <TableView fx:id="CopyTable" prefHeight="480.0" prefWidth="151.0">
+        <columns>
+          <TableColumn fx:id="copyColumn" prefWidth="150.0" text="Copy Data" />
+        </columns>
+      </TableView>
    </children>
 </Pane>
