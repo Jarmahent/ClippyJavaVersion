@@ -72,7 +72,7 @@ public class Controller{
     }
 
     @FXML
-    private void initialize(){ // Spawn a new Thread when the initialized is called and run the listener
+    private void initialize(){ // Spawn a new Thread when the initialized method is called and run the listener
         Task task = new Task<Void>() {
             @Override public Void call() {
 
