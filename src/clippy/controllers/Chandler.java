@@ -11,12 +11,21 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 
-public class Chandler extends Thread {
+
+/*
+
+    UNUSED AS OF 10/11/18
+
+ */
+
+
+public class Chandler {
     private DbController dbController;
     private int delay;
     private Clipboard clipboard;
 
     public Chandler(int delay){
+        System.out.println("Constructor ran!");
         this.delay = delay;
         this.dbController = new DbController();
         this.clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -57,6 +66,7 @@ public class Chandler extends Thread {
                 }
                 this.dbController.writeData(newString, localDate.toString());
                 System.out.println("Clipboard Data: " + newString);
+                System.out.println("Updated Table should happen");
                 oldString = newString;
             }catch(UnsupportedFlavorException | IOException e){
                 System.out.println(e);

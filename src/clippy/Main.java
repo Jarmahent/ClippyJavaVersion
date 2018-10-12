@@ -31,22 +31,19 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                System.exit(0);
-            }
-        });
-
-
         primaryStage.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+            /*
+                IT ONLY ERRORS OUT WHENEVER YOU DONT CLICK ON THE TEXT AND CLICK ON SOMETHING ELSE...
+                PROBABLY USE AN IF STATEMENT TO HANDLE THAT OR A TRY STATEMENT...
+
+             */
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(mouseEvent.getClickCount() == 2){
                     EventTarget event = (Text) mouseEvent.getTarget();
                     System.out.println(((Text) event).getText());
                 }
-//                System.out.println("mouse click detected! " + mouseEvent.getTarget());
+
             }
         });
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml")); // Build Scene from fxml file
