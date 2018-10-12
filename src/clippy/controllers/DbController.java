@@ -24,14 +24,7 @@ public class DbController {
             Statement stmt = this.conn.createStatement();
             System.out.println("Ran query...");
             stmt.execute(query);
-            try{
-                if(this.conn != null){
-                    System.out.println("Closing Connection...1");
-                    this.conn.close();
-                }
-            }catch(SQLException sqlerr){
-                System.out.println(sqlerr.getMessage());
-            }
+
         }catch(SQLException sqlerr){
             System.out.println(sqlerr.getMessage());
         }
@@ -45,14 +38,7 @@ public class DbController {
             pstmt.setString(2, time);
             System.out.println("Data inserted...2");
             pstmt.executeUpdate();
-            try{
-                if(this.conn != null){
-                    this.conn.close();
-                    System.out.println("Closing connection...2");
-                }
-            }catch(SQLException sqlerr){
-                System.out.println(sqlerr.getMessage());
-            }
+
         }catch(SQLException sqlerr){
             System.out.println(sqlerr.getMessage());
         }

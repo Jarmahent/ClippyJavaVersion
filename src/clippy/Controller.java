@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 
 public class Controller{
@@ -36,6 +39,10 @@ public class Controller{
     @FXML
     private TableView<ClipboardData> CopyTable = new TableView<ClipboardData>();
 
+    private Chandler Clistener;
+
+    private ScheduledExecutorService scheduledExecutorService;
+
     private DbController Dbcontroller;
 
     private ObservableList<ClipboardData> MyData(ArrayList data){
@@ -43,6 +50,7 @@ public class Controller{
         for(int i = 0; i < data.size(); i++){
             String dataString = data.get(i).toString();
             list.add(new ClipboardData(dataString));
+
         }
         return FXCollections.observableArrayList(list);
     }
@@ -52,28 +60,43 @@ public class Controller{
     public Controller(){  // Constructor
         super();
         this.Dbcontroller = new DbController();
+        this.Clistener = new Chandler(1000);
+        this.scheduledExecutorService = Executors.newScheduledThreadPool(1);
 
     }
 
     @FXML
     private void Listener(){
-        Chandler handler = new Chandler(1000);
-        handler.setDaemon(true);
-        handler.start();
+        CopyTable.setItems(MyData(this.Dbcontroller.getAllData()));
+        copyColumn.setCellValueFactory(new PropertyValueFactory<ClipboardData, String>("data"));
+//        Chandler handler = new Chandler(1000);
+//        handler.setDaemon(true);
+//        handler.start();
     }
 
     @FXML
     private void initialize(){
-        System.out.println("Init!");
+        this.Clistener.setDaemon(true);
+        this.Clistener.start();
+
+        this.scheduledExecutorService.scheduleAtFixedRate(this::updateTable, 0, 3, TimeUnit.SECONDS);
+
         CopyTable.setItems(MyData(this.Dbcontroller.getAllData()));
         copyColumn.setCellValueFactory(new PropertyValueFactory<ClipboardData, String>("data"));
     }
 
     @FXML
     private void handleButtonClicked(ActionEvent event){
+        CopyTable.getItems().clear();
+        CopyTable.setItems(MyData(this.Dbcontroller.getAllData()));
+        copyColumn.setCellValueFactory(new PropertyValueFactory<ClipboardData, String>("data"));
+    }
 
-//        copyData.setCellValueFactory(new PropertyValueFactory<String, String>("copyData"));
 
+    public void updateTable(){
+        CopyTable.getItems().clear();
+        CopyTable.setItems(MyData(this.Dbcontroller.getAllData()));
+        copyColumn.setCellValueFactory(new PropertyValueFactory<ClipboardData, String>("data"));
     }
 }
 
