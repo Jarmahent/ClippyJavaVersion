@@ -1,5 +1,6 @@
 package clippy;
 
+import clippy.controllers.DbController;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.event.EventTarget;
@@ -19,7 +20,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-
+        DbController controller = new DbController();
+        controller.createTable();
         primaryStage.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
             /*
                 IT ONLY ERRORS OUT WHENEVER YOU DONT CLICK ON THE TEXT AND CLICK ON SOMETHING ELSE...
