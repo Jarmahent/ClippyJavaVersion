@@ -1,32 +1,21 @@
 package clippy;
 
 import javafx.application.Application;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventTarget;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.PickResult;
+import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.text.Font;
-import javafx.event.ActionEvent;
-import javafx.stage.WindowEvent;
 
 import javafx.scene.input.MouseEvent;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class Main extends Application {
 
-    ScheduledExecutorService threadpool;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -40,18 +29,25 @@ public class Main extends Application {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(mouseEvent.getClickCount() == 2){
-                    EventTarget event = (Text) mouseEvent.getTarget();
-                    System.out.println(((Text) event).getText());
+                    try{
+                        EventTarget event = (Text) mouseEvent.getTarget();
+                        System.out.println(((Text) event).getText());
+                    }catch (ClassCastException e){
+                        System.out.println("Didnt Click on the Text");
+                    }
+                    
                 }
 
             }
         });
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml")); // Build Scene from fxml file
-        primaryStage.setTitle("Hello World");
-        Scene scene = new Scene(root, 640, 480);
-//        scene.getStylesheets().add
-//                (Main.class.getResource("assets/scene.css").toExternalForm());
+        primaryStage.setTitle("Clippy v.0.1.9");
+        Scene scene = new Scene(root, 495, 480);
+        scene.getStylesheets().add
+                (Main.class.getResource("assets/scene.css").toExternalForm());
         primaryStage.setScene(scene);
+        primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("assets/airplane@32.png")));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

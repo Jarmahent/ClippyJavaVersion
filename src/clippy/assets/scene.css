@@ -3,10 +3,20 @@
     src: url('Aileron-Regular.otf');
 }
 
-#text{
-    -fx-font: 36px "Aileron";
-
+@font-face{
+    font-family: 'Aileron-Bold';
+    src: url('Aileron-Bold.otf');
 }
 
+
+
+.table-view .column-header .label{
+    -fx-font-size: 20px;
+    -fx-font-family: "Aileron-Bold";
+
+}
 .root {
+    -fx-font-family: sans-sarif;
+    -fx-font: 15px "Aileron";
+
 }

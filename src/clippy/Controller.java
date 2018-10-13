@@ -115,13 +115,13 @@ public class Controller{
                         copyColumn.setCellValueFactory(new PropertyValueFactory<ClipboardData, String>("data"));
                         oldString = newString;
                     }catch(UnsupportedFlavorException | IOException e){
-                        System.out.println(e);
+                        System.out.println(e.getMessage());
                     }
 
                     try{
                         Thread.sleep(1000);
                     }catch(InterruptedException n){
-                        System.out.println(n.getMessage()      );
+                        System.out.println(n.getMessage());
                     }
 
                 }
@@ -133,16 +133,10 @@ public class Controller{
         ClipboardListenerThread.start();
 
 
-        CopyTable.setItems(MyData(this.Dbcontroller.getAllData()));
+        CopyTable.setItems(MyData(this.Dbcontroller.getAllData())); // Insert the data to the table
         copyColumn.setCellValueFactory(new PropertyValueFactory<ClipboardData, String>("data"));
     }
 
-    @FXML
-    private void handleButtonClicked(ActionEvent event){
-        CopyTable.getItems().clear();
-        CopyTable.setItems(MyData(this.Dbcontroller.getAllData()));
-        copyColumn.setCellValueFactory(new PropertyValueFactory<ClipboardData, String>("data"));
-    }
 
 }
 
